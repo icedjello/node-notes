@@ -1,6 +1,6 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { createNewNote, getAllNotes } from "../src/notes.js";
+import { createNewNote, getAllNotes, findNotes } from "../src/notes.js";
 
 yargs(hideBin(process.argv))
     .command(
@@ -41,27 +41,12 @@ yargs(hideBin(process.argv))
             });
         },
         async ({ filter: searchContent, tags: searchTags }) => {
-            const allNotes = await getAllNotes();
-            let filteredNotes;
-
-            if (searchTags && searchTags.length) {
-                filteredNotes = allNotes.filter(
-                    ({ content, tags }) =>
-                        content.includes(searchContent) &&
-                        searchTags.every((t) => tags.includes(t)),
-                );
-            } else {
-                filteredNotes = allNotes.filter(({ content }) =>
-                    content.includes(searchContent),
-                );
-            }
-
-            if (filteredNotes.length === 0) {
-                console.log("no notes match your search");
+            const foundNotes = await findNotes(searchContent, searchTags);
+            if (foundNotes.length === 0) {
+                console.log("found no notes");
                 return;
             }
-
-            console.log("found", { foundNotes: filteredNotes });
+            console.log(foundNotes);
             return;
         },
     )
@@ -74,7 +59,21 @@ yargs(hideBin(process.argv))
                 description: "The id of the note you want to remove",
             });
         },
-        async (argv) => {},
+        async ({ id }) => {
+            const allNotes = await getAllNotes();
+            const newNotes = [];
+            let foundNoteToRemove = false;
+            for (note of allNotes) {
+                if (note.id === id) {
+                    foundNoteToRemove = true;
+                    continue;
+                }
+                newNotes.push(note);
+            }
+            if (foundNoteToRemove) {
+                console.log("note removed");
+            }
+        },
     )
     .command(
         "web [port]",
