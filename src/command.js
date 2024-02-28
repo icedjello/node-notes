@@ -102,6 +102,5 @@ yargs(hideBin(process.argv))
         await deleteAllNotes();
         console.log("removed all notes");
     })
-
     .demandCommand(1)
     .parse();
