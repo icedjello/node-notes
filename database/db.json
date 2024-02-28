@@ -1,27 +1,45 @@
 {
     "notes": [
         {
-            "content": "I love Amelia Themis",
-            "tags": [
-                "love",
-                "AFT"
-            ],
-            "id": 1709047426278
+            "content": "test note 1",
+            "tags": [],
+            "id": 1709126183344
         },
         {
-            "content": "test 1",
+            "content": "test note 2",
             "tags": [
                 "test"
             ],
-            "id": 1709048008498
+            "id": 1709126198091
         },
         {
-            "content": "test 2",
+            "content": "test note 3",
             "tags": [
                 "test",
-                "hi"
+                "tag"
             ],
-            "id": 1709048490227
+            "id": 1709126205869
+        },
+        {
+            "content": "testing no tags",
+            "tags": [],
+            "id": 1709126478167
+        },
+        {
+            "content": "making a new note",
+            "tags": [
+                "new",
+                "note"
+            ],
+            "id": 1709126814918
+        },
+        {
+            "content": "making a new note",
+            "tags": [
+                "new",
+                "note"
+            ],
+            "id": 1709126830315
         }
     ]
 }

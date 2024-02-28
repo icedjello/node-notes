@@ -1,6 +1,6 @@
 import { getDB, saveDB, appendDB } from "../database/db.js";
 
-export async function createNewNote(content, tags) {
+export async function createNewNote(content, tags = []) {
     const newNote = {
         content,
         tags: tags,

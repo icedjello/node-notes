@@ -7,6 +7,7 @@ import {
     deleteNote,
     deleteAllNotes,
 } from "../src/notes.js";
+import { printNote, printMultipleNotes } from "./utils.js";
 
 yargs(hideBin(process.argv))
     .command(
@@ -19,8 +20,9 @@ yargs(hideBin(process.argv))
             });
         },
         async ({ note: content, tags }) => {
-            await createNewNote(content, tags);
-            console.log("Noted");
+            const newNote = await createNewNote(content, tags);
+            console.log("Noted:");
+            printNote(newNote);
             return;
         },
     )
@@ -34,7 +36,12 @@ yargs(hideBin(process.argv))
         "Get all notes",
         () => {},
         async () => {
-            console.log(await getAllNotes());
+            const allNotes = await getAllNotes();
+            if (allNotes.length === 0) {
+                console.log("no notes");
+                return;
+            }
+            printMultipleNotes(allNotes);
             return;
         },
     )
