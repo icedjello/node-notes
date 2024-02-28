@@ -30,5 +30,24 @@ export async function findNotes(searchContent, searchTags) {
 
     return filteredNotes;
 }
-export async function deleteNote(id) {}
-export async function deleteAllNotes() {}
+export async function deleteNote(id) {
+    const { notes: allNotes } = await getDB();
+    const newNotes = [];
+    let removedNote = null;
+    for (let note of allNotes) {
+        if (note.id === id) {
+            removedNote = note;
+            continue;
+        }
+        newNotes.push(note);
+    }
+    if (removedNote !== null) {
+        // found note so save new db
+        await saveDB({ notes: newNotes });
+    }
+    return removedNote;
+}
+export async function deleteAllNotes() {
+    await saveDB({ notes: [] });
+    return;
+}
