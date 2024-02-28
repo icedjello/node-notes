@@ -21,7 +21,7 @@ yargs(hideBin(process.argv))
         },
         async ({ note: content, tags }) => {
             const newNote = await createNewNote(content, tags);
-            console.log("Noted:");
+            console.log("noted");
             printNote(newNote);
             return;
         },
@@ -61,7 +61,7 @@ yargs(hideBin(process.argv))
                 console.log("found no notes");
                 return;
             }
-            console.log(foundNotes);
+            printMultipleNotes(foundNotes);
             return;
         },
     )
@@ -75,11 +75,15 @@ yargs(hideBin(process.argv))
             });
         },
         async ({ id }) => {
-            console.log(
-                (await deleteNote(id)) === null
-                    ? "could not find note to delete"
-                    : "note removed",
-            );
+            const removedNote = await deleteNote(id);
+
+            if (removedNote === null) {
+                console.log("could not find note");
+                return;
+            }
+            console.log("removed:");
+            printNote(removedNote);
+            return;
         },
     )
     .command(
@@ -94,15 +98,10 @@ yargs(hideBin(process.argv))
         },
         async (argv) => {},
     )
-    .command(
-        "clean",
-        "remove all notes",
-        // () => {},
-        async () => {
-            await deleteAllNotes();
-            console.log("removed all notes");
-        },
-    )
+    .command("clean", "remove all notes", async () => {
+        await deleteAllNotes();
+        console.log("removed all notes");
+    })
 
     .demandCommand(1)
     .parse();
