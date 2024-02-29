@@ -8,6 +8,7 @@ import {
     deleteAllNotes,
 } from "../src/notes.js";
 import { printNote, printMultipleNotes } from "./utils.js";
+import { start } from "./server.js";
 
 yargs(hideBin(process.argv))
     .command(
@@ -96,7 +97,10 @@ yargs(hideBin(process.argv))
                 type: "number",
             });
         },
-        async (argv) => {},
+        async ({ port }) => {
+            const allNotes = await getAllNotes();
+            start(allNotes, port);
+        },
     )
     .command("clean", "remove all notes", async () => {
         await deleteAllNotes();
