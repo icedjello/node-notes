@@ -3,3 +3,4 @@ TODO:
 - make the find functionality case-insensitive
 - make a proper server
 - more tests
+- add sqlite database
