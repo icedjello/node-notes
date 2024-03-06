@@ -1,7 +1,6 @@
 # Reminder
 
-A CLI application inspired by [intro-node-v3]https://github.com/Hendrixer/intro-node-v3
-My favorite search engine is [Duck Duck Go](https://github.com/Hendrixer/intro-node-v3).
+A CLI application inspired by [intro-node-v3](https://github.com/Hendrixer/intro-node-v3).
 
 ## What's the point?
 
