@@ -1,11 +1,11 @@
 {
-    "name": "reminder",
+    "name": "node-notes",
     "version": "1.0.0",
-    "description": "A simple notes CLI notes app, inspired by https://github.com/Hendrixer/intro-node-v3",
+    "description": "A simple notes CLI app, inspired by https://github.com/Hendrixer/intro-node-v3",
     "main": "index.js",
     "type": "module",
     "bin": {
-        "reminder": "./index.js"
+        "note": "./index.js"
     },
     "scripts": {
         "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
@@ -15,7 +15,6 @@
     "author": "Bamdad Fard",
     "license": "ISC",
     "dependencies": {
-        "open": "^10.0.4",
         "yargs": "^17.7.2"
     },
     "devDependencies": {
